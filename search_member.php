@@ -24,7 +24,15 @@ if (is_file(__DIR__ . '/config.php')) {
 }
 
 // set default values if there no value has been stored in the config.php
-if (!isset($plg_search_city) || !is_numeric($plg_search_city) || $plg_search_city !== 1) {
+if (!isset($plg_show_names) || !is_numeric($plg_show_names) || $plg_show_names > 4) {
+    $plg_show_names = 1;
+}
+
+if (!isset($plg_rolle_sql) || !is_array($plg_rolle_sql)) {
+    $plg_rolle_sql = null;
+}
+
+if (!isset($plg_search_city) || !is_numeric($plg_search_city) || $plg_search_city > 1) {
     $plg_search_city = 0;
 }
 
