@@ -56,9 +56,10 @@ if ($gValidLogin) {
     $form->addSubmitButton('btn_search', 'suchen', array('icon' => 'fa-search'));
     echo $form->show();
 
+    $getPlgSearchUser = admFuncVariableIsValid($_GET, 'plg_search_usr', 'string');
 
-    if (isset($_GET['plg_search_usr']) && $_GET['plg_search_usr'] != '') {
-        $plg_search_string = '%' . $_GET['plg_search_usr'] . '%';
+    if ($getPlgSearchUser) {
+        $search_string = '%' . $getPlgSearchUser . '%';
         $sql = 'SELECT
                     usr_uuid,
                     usr_login_name,
@@ -107,12 +108,12 @@ if ($gValidLogin) {
             DATE_NOW,
             DATE_NOW,
             $gCurrentOrgId,
-            $plg_search_string
+            $search_string
         );
 
         if ($plg_search_city == 1) {
             $sql .= ' OR city LIKE ?';
-            $queryParams[] = $plg_search_string;
+            $queryParams[] = $search_string;
         }
         $searchUserStatement = $gDb->queryPrepared($sql, $queryParams);
 
