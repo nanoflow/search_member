@@ -37,9 +37,9 @@ if (isset($plg_rolle_sql) && is_array($plg_rolle_sql) && count($plg_rolle_sql) >
 
 
 
+echo '<div id="plugin_' . $pluginFolder . '" class="admidio-plugin-content">';
+echo '<h3>' . $gL10n->get('PLG_SEARCH_HEADLINE') . '</h3>';
 if ($gValidLogin) {
-    echo '<div id="plugin_' . $pluginFolder . '" class="admidio-plugin-content">';
-    echo '<h3>' . $gL10n->get('PLG_SEARCH_HEADLINE') . '</h3>';
     $form = new HtmlForm('search_member_form', null, null, array('type' => 'vertical', 'method' => 'get', 'setFocus' => 'false'));
 
     $placeholder = $gL10n->get('PLG_SEARCH_PLACEHOLDER');
@@ -153,5 +153,5 @@ if ($gValidLogin) {
     }
     echo '</div>';
 } else {
-    null;
+    echo '<div>' . $gL10n->get('PLG_SEARCH_NOT_LOGGED_IN') . '</div>';
 }
