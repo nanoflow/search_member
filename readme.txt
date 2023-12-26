@@ -1,7 +1,7 @@
 ====== Search Member ======
 
-Version 1.0.0 
-Plugin for admidio v4.x.x
+Version 1.0.1 
+Plugin for admidio v4.x.x (tested until 4.3.0 Beta 3)
 
 ==== Description ====
 This plugin can be used in the overview page. It provides a search field to search for members of 

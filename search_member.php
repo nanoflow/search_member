@@ -58,7 +58,7 @@ if ($gValidLogin) {
     $form->addInput(
         'plg_search_usr',
         '',
-        null,
+        '',
         array('type' => 'search', 'placeholder' => $placeholder)
     );
     $form->addSubmitButton('btn_search', 'suchen', array('icon' => 'fa-search'));
