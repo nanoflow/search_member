@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="PLG_SEARCH_HEADLINE">Zoek lid</string>
+  <string name="PLG_SEARCH_PLACEHOLDER">naam</string>
+  <string name="PLG_SEARCH_PLACEHOLDER_INCLUDING_CITY">naam of plaats</string>
+  <string name="PLG_SEARCH_NO_RESULTS">Geen zoekresultaat</string>
+  <string name="PLG_SEARCH_NOT_LOGGED_IN">Je moet ingelogd zijn om leden te kunnen zoeken.</string>
+</resources>
