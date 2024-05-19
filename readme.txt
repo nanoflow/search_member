@@ -1,6 +1,6 @@
 ====== Search Member ======
 
-Version 1.0.1 
+Version 1.0.3
 Plugin for admidio v4.x.x (tested until 4.3.0 Beta 3)
 
 ==== Description ====
