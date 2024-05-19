@@ -61,7 +61,7 @@ if ($gValidLogin) {
         '',
         array('type' => 'search', 'placeholder' => $placeholder)
     );
-    $form->addSubmitButton('btn_search', 'suchen', array('icon' => 'fa-search'));
+    $form->addSubmitButton('btn_search', $gL10n->get('SYS_SEARCH'), array('icon' => 'fa-search'));
     echo $form->show();
 
     $getPlgSearchUser = admFuncVariableIsValid($_GET, 'plg_search_usr', 'string');
