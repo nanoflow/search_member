@@ -48,7 +48,7 @@ if (isset($plg_rolle_sql) && is_array($plg_rolle_sql) && count($plg_rolle_sql) >
 echo '<div id="plugin_' . $pluginFolder . '" class="admidio-plugin-content">';
 echo '<h3>' . $gL10n->get('PLG_SEARCH_HEADLINE') . '</h3>';
 if ($gValidLogin) {
-    $form = new HtmlForm('search_member_form', null, null, array('type' => 'vertical', 'method' => 'get', 'setFocus' => 'false'));
+    $form = new HtmlForm('search_member_form', '', null, array('type' => 'vertical', 'method' => 'get', 'setFocus' => 'false'));
 
     $placeholder = $gL10n->get('PLG_SEARCH_PLACEHOLDER');
     if ($plg_search_city == 1) {
@@ -147,7 +147,7 @@ if ($gValidLogin) {
                         $plgShowName = $row['first_name'] . ' ' . $row['last_name'];
                 }
 
-                $resultString = '<strong><a target="' . $plg_link_target . '" title="' . $gL10n->get('SYS_SHOW_PROFILE') . '"href="' . SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/profile/profile.php', array('user_uuid' => $row['usr_uuid'])) . '">' . $plgShowName . '</a></strong>';
+                $resultString = '<strong><a "title="' . $gL10n->get('SYS_SHOW_PROFILE') . '"href="' . SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/profile/profile.php', array('user_uuid' => $row['usr_uuid'])) . '">' . $plgShowName . '</a></strong>';
                 if ($plg_search_city == 1) {
                     $resultString .= ' (' . $row['city'] . ')';
                 }
