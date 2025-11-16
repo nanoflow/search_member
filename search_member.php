@@ -1,4 +1,8 @@
 <?php
+use Admidio\Infrastructure\Plugins\Overview;
+use Admidio\Infrastructure\Utils\SecurityUtils;
+use Admidio\Roles\Entity\Role;
+use Admidio\UI\Presenter\FormPresenter;
 
 /**
  ***********************************************************************************************
@@ -6,69 +10,77 @@
  *
  * Plugin shows a search field to search for members of the organisation
  *
- * Compatible with Admidio version 4.2
+ * Compatible with Admidio version 5.0
  *
  * @copyright 2004-2022 The Admidio Team
  * @see https://www.admidio.org/
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0 only
  ***********************************************************************************************
  */
-$rootPath = dirname(dirname(__DIR__));
-$pluginFolder = basename(__DIR__);
+try {
+    $rootPath = dirname(__DIR__, 2);
+    $pluginFolder = basename(__DIR__);
 
-require_once($rootPath . '/adm_program/system/common.php');
+    require_once($rootPath . '/system/common.php');
 
-// only include config file if it exists
-if (is_file(__DIR__ . '/config.php')) {
-    require_once(__DIR__ . '/config.php');
-}
-
-// set default values if there no value has been stored in the config.php
-if (!isset($plg_show_names) || !is_numeric($plg_show_names) || $plg_show_names > 4) {
-    $plg_show_names = 1;
-}
-
-if (!isset($plg_rolle_sql) || !is_array($plg_rolle_sql)) {
-    $plg_rolle_sql = null;
-}
-
-if (!isset($plg_search_city) || !is_numeric($plg_search_city) || $plg_search_city > 1) {
-    $plg_search_city = 0;
-}
-
-// Check if the role condition has been set
-if (isset($plg_rolle_sql) && is_array($plg_rolle_sql) && count($plg_rolle_sql) > 0) {
-    $sqlRol = 'IN (' . implode(',', $plg_rolle_sql) . ')';
-} else {
-    $sqlRol = 'IS NOT NULL';
-}
-
-
-
-echo '<div id="plugin_' . $pluginFolder . '" class="admidio-plugin-content">';
-echo '<h3>' . $gL10n->get('PLG_SEARCH_HEADLINE') . '</h3>';
-if ($gValidLogin) {
-    $form = new HtmlForm('search_member_form', '', null, array('type' => 'vertical', 'method' => 'get', 'setFocus' => 'false'));
-
-    $placeholder = $gL10n->get('PLG_SEARCH_PLACEHOLDER');
-    if ($plg_search_city == 1) {
-        $placeholder = $gL10n->get('PLG_SEARCH_PLACEHOLDER_INCLUDING_CITY');
+    // only include config file if it exists
+    if (is_file(__DIR__ . '/config.php')) {
+        require_once(__DIR__ . '/config.php');
     }
 
-    $form->addInput(
-        'plg_search_usr',
-        '',
-        '',
-        array('type' => 'search', 'placeholder' => $placeholder)
-    );
-    $form->addSubmitButton('btn_search', $gL10n->get('SYS_SEARCH'), array('icon' => 'fa-search'));
-    echo $form->show();
+    $searchMemberFormPlugin = new Overview($pluginFolder);
 
-    $getPlgSearchUser = admFuncVariableIsValid($_GET, 'plg_search_usr', 'string');
+    // set default values if there has been no value stored in the config.php
+    if (!isset($plg_show_names) || !is_numeric($plg_show_names) || $plg_show_names > 4) {
+        $plg_show_names = 1;
+    }
 
-    if ($getPlgSearchUser) {
-        $search_string = '%' . $getPlgSearchUser . '%';
-        $sql = 'SELECT
+    if (!isset($plg_rolle_sql) || !is_array($plg_rolle_sql)) {
+        $plg_rolle_sql = null;
+    }
+
+    if (!isset($plg_search_city) || !is_numeric($plg_search_city) || $plg_search_city > 1) {
+        $plg_search_city = 0;
+    }
+
+    // Check if the role condition has been set
+    if (isset($plg_rolle_sql) && is_array($plg_rolle_sql) && count($plg_rolle_sql) > 0) {
+        $sqlRol = 'IN (' . implode(',', $plg_rolle_sql) . ')';
+    } else {
+        $sqlRol = 'IS NOT NULL';
+    }
+
+    if ($gValidLogin) {
+        $form = new FormPresenter(
+            id: 'adm_plugin_search_member',
+            template: 'plugin.search-member-form.tpl.logged-in',
+            action: ADMIDIO_URL . FOLDER_MODULES . '/overview.php',
+            htmlPage: null,
+            options: array('type' => 'vertical', 'method' => 'get', 'setFocus' => false, 'showRequiredFields' => false)
+        );
+        $placeholder = $gL10n->get('PLG_SEARCH_PLACEHOLDER');
+        if ($plg_search_city == 1) {
+            $placeholder = $gL10n->get('PLG_SEARCH_PLACEHOLDER_INCLUDING_CITY');
+        }
+
+        $getPlgSearchUser = admFuncVariableIsValid($_GET, 'plg_search_usr', 'string');
+
+        $form->addInput(
+            'plg_search_usr',
+            '',
+            $getPlgSearchUser,
+            array('type' => 'search', 'placeholder' => $placeholder)
+        );
+        $form->addSubmitButton('plg_btn_search', $gL10n->get('PLG_SEARCH'), array('icon' => 'bi bi-search'));
+
+        $smarty = $searchMemberFormPlugin->createSmartyObject();
+        $form->addToSmarty($smarty);
+        $gCurrentSession->addFormObject($form);
+        echo $smarty->fetch('plugin.search-member-form.logged-in.tpl');
+
+        if ($getPlgSearchUser) {
+            $search_string = '%' . $getPlgSearchUser . '%';
+            $sql = 'SELECT
                     usr_uuid,
                     usr_login_name,
                     first_name ,
@@ -109,57 +121,62 @@ if ($gValidLogin) {
                 WHERE 
                     CONCAT (first_name, \' \', last_name) LIKE ?';
 
-        $queryParams = array(
-            $gProfileFields->getProperty('LAST_NAME', 'usf_id'),
-            $gProfileFields->getProperty('FIRST_NAME', 'usf_id'),
-            $gProfileFields->getProperty('CITY', 'usf_id'),
-            DATE_NOW,
-            DATE_NOW,
-            $gCurrentOrgId,
-            $search_string
-        );
+            $queryParams = array(
+                $gProfileFields->getProperty('LAST_NAME', 'usf_id'),
+                $gProfileFields->getProperty('FIRST_NAME', 'usf_id'),
+                $gProfileFields->getProperty('CITY', 'usf_id'),
+                DATE_NOW,
+                DATE_NOW,
+                $gCurrentOrgId,
+                $search_string
+            );
 
-        if ($plg_search_city == 1) {
-            $sql .= ' OR city LIKE ?';
-            $queryParams[] = $search_string;
-        }
-        $searchUserStatement = $gDb->queryPrepared($sql, $queryParams);
-
-        $allSearchResults = array();
-        $textSearchResults = '';
-
-        if ($searchUserStatement->rowCount() > 0) {
-            while ($row = $searchUserStatement->fetch()) {
-                switch ($plg_show_names) {
-                    case 1:  // first name, last name
-                        $plgShowName = $row['first_name'] . ' ' . $row['last_name'];
-                        break;
-                    case 2:  // last name, first name
-                        $plgShowName = $row['last_name'] . ', ' . $row['first_name'];
-                        break;
-                    case 3:  // first name
-                        $plgShowName = $row['first_name'];
-                        break;
-                    case 4:  // Loginname
-                        $plgShowName = $row['usr_login_name'];
-                        break;
-                    default: // first name, last name
-                        $plgShowName = $row['first_name'] . ' ' . $row['last_name'];
-                }
-
-                $resultString = '<strong><a "title="' . $gL10n->get('SYS_SHOW_PROFILE') . '"href="' . SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/profile/profile.php', array('user_uuid' => $row['usr_uuid'])) . '">' . $plgShowName . '</a></strong>';
-                if ($plg_search_city == 1) {
-                    $resultString .= ' (' . $row['city'] . ')';
-                }
-                $allSearchResults[] = $resultString;
+            if ($plg_search_city == 1) {
+                $sql .= ' OR city LIKE ?';
+                $queryParams[] = $search_string;
             }
-            $textSearchResults = implode('<br />', $allSearchResults);
-            echo $textSearchResults;
+            $searchUserStatement = $gDb->queryPrepared($sql, $queryParams);
+
+            $allSearchResults = array();
+            $textSearchResults = '';
+
+            if ($searchUserStatement->rowCount() > 0) {
+                while ($row = $searchUserStatement->fetch()) {
+                    switch ($plg_show_names) {
+                        case 1:  // first name, last name
+                            $plgShowName = $row['first_name'] . ' ' . $row['last_name'];
+                            break;
+                        case 2:  // last name, first name
+                            $plgShowName = $row['last_name'] . ', ' . $row['first_name'];
+                            break;
+                        case 3:  // first name
+                            $plgShowName = $row['first_name'];
+                            break;
+                        case 4:  // Loginname
+                            $plgShowName = $row['usr_login_name'];
+                            break;
+                        default: // first name, last name
+                            $plgShowName = $row['first_name'] . ' ' . $row['last_name'];
+                    }
+
+                    $resultString = '<strong><a "title="' . $gL10n->get('SYS_SHOW_PROFILE') . '"href="' . SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/profile/profile.php', array('user_uuid' => $row['usr_uuid'])) . '">' . $plgShowName . '</a></strong>';
+                    if ($plg_search_city == 1) {
+                        $resultString .= ' (' . $row['city'] . ')';
+                    }
+                    $allSearchResults[] = $resultString;
+                }
+                $textSearchResults = implode('<br />', $allSearchResults);
+                echo $textSearchResults;
+            }
+        }
+
+    } else {
+        if (isset($page)) {
+            echo $searchMemberFormPlugin->html('plugin.search-member-form.logged-out.tpl');
         } else {
-            echo $gL10n->get('PLG_SEARCH_NO_RESULTS');
+            $searchMemberFormPlugin->showHtmlPage('plugin.search-member-form.logged-out.tpl');
         }
     }
-    echo '</div>';
-} else {
-    echo '<div>' . $gL10n->get('PLG_SEARCH_NOT_LOGGED_IN') . '</div>';
+} catch (Throwable $e) {
+    echo $e->getMessage();
 }
