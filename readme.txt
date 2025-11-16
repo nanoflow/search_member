@@ -1,7 +1,7 @@
 ====== Search Member ======
 
-Version 1.0.3
-Plugin for admidio v4.x.x (tested until 4.3.0 Beta 3)
+Version 2.0.0
+Plugin for admidio v5.x.x (tested until 5.0.1)
 
 ==== Description ====
 This plugin can be used in the overview page. It provides a search field to search for members of 
@@ -19,7 +19,7 @@ The plugin is available at [[https://github.com/nanoflow/search_member]]
 
 ==== Installation ====
 copy the plugin to your adm_plugins folder
-add the following codeblock to /adm_themes/simple/templates/overview.tpl
+add the following codeblock to /themes/simple/templates/system/overview.tpl
 ```
 <div class="admidio-overview-plugin col-sm-6 col-lg-4 col-xl-3" id="admidio-plugin-search-member">
     <div class="card admidio-card">

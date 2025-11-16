@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+  <string name="PLG_SEARCH">Suchen</string>
   <string name="PLG_SEARCH_HEADLINE">Mitglied suchen</string>
   <string name="PLG_SEARCH_PLACEHOLDER">Name</string>
   <string name="PLG_SEARCH_PLACEHOLDER_INCLUDING_CITY">Name oder Wohnort</string>
