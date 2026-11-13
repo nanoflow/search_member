@@ -7,4 +7,13 @@
         {include 'sys-template-parts/form.button.tpl' data=$elements['plg_btn_search']}
         <div class="form-alert" style="display: none;">&nbsp;</div>
     </form>
+    {if count($results) > 0}
+        <ul class="list-group list-group-flush mt-3">
+            {foreach $results as $result}
+                <li class="list-group-item">{$result.resultText}</li>
+            {/foreach}
+        </ul>
+    {elseif $searchTerm !== ''}
+        <div class="mt-3">{$l10n->get('PLG_SEARCH_NO_RESULTS')}</div>
+    {/if}
 </div>

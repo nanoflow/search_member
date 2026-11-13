@@ -6,4 +6,15 @@
   <string name="PLG_SEARCH_PLACEHOLDER_INCLUDING_CITY">naam of plaats</string>
   <string name="PLG_SEARCH_NO_RESULTS">Geen zoekresultaat</string>
   <string name="PLG_SEARCH_NOT_LOGGED_IN">Je moet ingelogd zijn om leden te kunnen zoeken.</string>
+  <string name="PLG_SEARCH_DESCRIPTION">Deze plugin toont een zoekveld op de overzichtspagina waarmee je leden van de organisatie kunt zoeken. Het is beschikbaar voor alle ingelogde gebruikers. De zoekresultaten worden getoond als links naar het gebruikersprofiel.</string>
+  <!-- Plugin preferences -->
+  <string name="PLG_SEARCH_PREFERENCES_SHOW_NAMES">Weergave van de naam</string>
+  <string name="PLG_SEARCH_PREFERENCES_SHOW_NAMES_DESC">Kies hoe de naam van een zoekresultaat moet worden weergegeven. (standaard: voornaam, achternaam)</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_FIRST_LAST">Voornaam, achternaam</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_LAST_FIRST">Achternaam, voornaam</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_FIRST">Voornaam</string>
+  <string name="PLG_SEARCH_PREFERENCES_SEARCH_CITY">Ook zoeken op woonplaats</string>
+  <string name="PLG_SEARCH_PREFERENCES_SEARCH_CITY_DESC">Als deze optie is ingeschakeld, zoekt de plugin ook naar leden die in een bepaalde plaats wonen. (standaard: uitgeschakeld)</string>
+  <string name="PLG_SEARCH_PREFERENCES_ROLES_ID_LIST">Zoeken beperken tot rollen</string>
+  <string name="PLG_SEARCH_PREFERENCES_ROLES_ID_LIST_DESC">Alleen leden van de geselecteerde rollen worden in de zoekresultaten getoond. Zonder selectie worden alle leden van de organisatie doorzocht.</string>
 </resources>

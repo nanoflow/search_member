@@ -3,7 +3,18 @@
   <string name="PLG_SEARCH">search</string>
   <string name="PLG_SEARCH_HEADLINE">Search member</string>
   <string name="PLG_SEARCH_PLACEHOLDER">name</string>
-  <string name="PLG_SEARCH_PLACEHOLDER_INCLUDING_CITY">name oder residence</string>
+  <string name="PLG_SEARCH_PLACEHOLDER_INCLUDING_CITY">name or residence</string>
   <string name="PLG_SEARCH_NO_RESULTS">No search results</string>
   <string name="PLG_SEARCH_NOT_LOGGED_IN">You have to be logged in to search for members.</string>
+  <string name="PLG_SEARCH_DESCRIPTION">This plugin shows a search field on the overview page to search for members of the organisation. It is available to all logged in users. The search results are shown as links to the user profile.</string>
+  <!-- Plugin preferences -->
+  <string name="PLG_SEARCH_PREFERENCES_SHOW_NAMES">Display of the name</string>
+  <string name="PLG_SEARCH_PREFERENCES_SHOW_NAMES_DESC">Choose how the name of a search result should be displayed. (default: first name, last name)</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_FIRST_LAST">First name, last name</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_LAST_FIRST">Last name, first name</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_FIRST">First name</string>
+  <string name="PLG_SEARCH_PREFERENCES_SEARCH_CITY">Also search for the city</string>
+  <string name="PLG_SEARCH_PREFERENCES_SEARCH_CITY_DESC">If this option is enabled, the plugin will also search for members who live in a certain city. (default: disabled)</string>
+  <string name="PLG_SEARCH_PREFERENCES_ROLES_ID_LIST">Restrict search to roles</string>
+  <string name="PLG_SEARCH_PREFERENCES_ROLES_ID_LIST_DESC">Only members of the selected roles are shown in the search results. Without a selection all members of the organisation are searched.</string>
 </resources>

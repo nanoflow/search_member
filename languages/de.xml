@@ -6,4 +6,15 @@
   <string name="PLG_SEARCH_PLACEHOLDER_INCLUDING_CITY">Name oder Wohnort</string>
   <string name="PLG_SEARCH_NO_RESULTS">Kein Treffer</string>
   <string name="PLG_SEARCH_NOT_LOGGED_IN">Du musst angemeldet sein, um Mitglieder suchen zu können.</string>
+  <string name="PLG_SEARCH_DESCRIPTION">Dieses Plugin zeigt auf der Übersichtsseite ein Suchfeld an, mit dem du Mitglieder der Organisation suchen kannst. Es steht allen angemeldeten Benutzern zur Verfügung. Die Suchergebnisse werden als Links zum Benutzerprofil angezeigt.</string>
+  <!-- Plugin preferences -->
+  <string name="PLG_SEARCH_PREFERENCES_SHOW_NAMES">Anzeige des Namens</string>
+  <string name="PLG_SEARCH_PREFERENCES_SHOW_NAMES_DESC">Lege fest, wie der Name eines Suchergebnisses angezeigt werden soll. (Standard: Vorname, Nachname)</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_FIRST_LAST">Vorname, Nachname</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_LAST_FIRST">Nachname, Vorname</string>
+  <string name="PLG_SEARCH_SHOW_NAMES_FIRST">Vorname</string>
+  <string name="PLG_SEARCH_PREFERENCES_SEARCH_CITY">Auch nach Wohnort suchen</string>
+  <string name="PLG_SEARCH_PREFERENCES_SEARCH_CITY_DESC">Wenn diese Option aktiviert ist, sucht das Plugin auch nach Mitgliedern, die in einem bestimmten Ort wohnen. (Standard: deaktiviert)</string>
+  <string name="PLG_SEARCH_PREFERENCES_ROLES_ID_LIST">Suche auf Rollen einschränken</string>
+  <string name="PLG_SEARCH_PREFERENCES_ROLES_ID_LIST_DESC">Nur Mitglieder der ausgewählten Rollen werden in den Suchergebnissen angezeigt. Ohne Auswahl werden alle Mitglieder der Organisation durchsucht.</string>
 </resources>

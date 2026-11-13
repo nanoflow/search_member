@@ -1,0 +1,59 @@
+{
+    "name": "PLG_SEARCH_HEADLINE",
+    "description": "PLG_SEARCH_DESCRIPTION",
+    "version": "3.0.0",
+    "author": "Admidio Team",
+    "url": "https://www.admidio.org",
+    "icon": "bi-search",
+    "requires": {
+        "admidio": ">=6.0",
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "AdmidioPlugin\\SearchMember\\": "src/"
+    },
+    "preferences": {
+        "section": "overview_extensions"
+    },
+    "settings": {
+        "search_member_plugin_enabled": {
+            "type": "enum",
+            "default": "1",
+            "values": {
+                "0": "SYS_DISABLED",
+                "1": "SYS_ENABLED",
+                "2": "ORG_ONLY_FOR_REGISTERED_USER"
+            },
+            "label": "ORG_ACCESS_TO_PLUGIN",
+            "description": "ORG_ACCESS_TO_PLUGIN_DESC"
+        },
+        "search_member_overview_sequence": {
+            "type": "integer",
+            "default": 3
+        },
+        "search_member_show_names": {
+            "type": "enum",
+            "default": "1",
+            "values": {
+                "1": "PLG_SEARCH_SHOW_NAMES_FIRST_LAST",
+                "2": "PLG_SEARCH_SHOW_NAMES_LAST_FIRST",
+                "3": "PLG_SEARCH_SHOW_NAMES_FIRST",
+                "4": "SYS_USERNAME"
+            },
+            "label": "PLG_SEARCH_PREFERENCES_SHOW_NAMES",
+            "description": "PLG_SEARCH_PREFERENCES_SHOW_NAMES_DESC"
+        },
+        "search_member_search_city": {
+            "type": "boolean",
+            "default": false,
+            "label": "PLG_SEARCH_PREFERENCES_SEARCH_CITY",
+            "description": "PLG_SEARCH_PREFERENCES_SEARCH_CITY_DESC"
+        },
+        "search_member_roles_sql": {
+            "type": "roles",
+            "default": [],
+            "label": "PLG_SEARCH_PREFERENCES_ROLES_ID_LIST",
+            "description": "PLG_SEARCH_PREFERENCES_ROLES_ID_LIST_DESC"
+        }
+    }
+}

@@ -1,14 +1,14 @@
 ====== Search Member ======
 
-Version 2.0.0
-Plugin for admidio v5.x.x (tested until 5.0.1)
+Version 3.0.0
+Plugin for Admidio v6.0+ (uses the Admidio 6 plugin system)
 
 ==== Description ====
-This plugin can be used in the overview page. It provides a search field to search for members of 
-the organisation. It is available to all logged in users. Roles that should included in the search 
-can be specified in the config, otherwise it searches all members in the database. The search results 
-are shown as links to the user profile. You can specify if you want to show first and/or last name or 
-the login name.
+This plugin adds a widget to the overview page. It provides a search field to search for members of
+the organisation. It is available to all logged in users. Roles that should be included in the search
+can be restricted in the plugin preferences, otherwise it searches all members in the database. The
+search results are shown as links to the user profile. You can specify if you want to show first
+and/or last name or the login name.
 
 If your organisation has members across multiple cities, you can include the city in the search.
 
@@ -18,17 +18,11 @@ If your organisation has members across multiple cities, you can include the cit
 The plugin is available at [[https://github.com/nanoflow/search_member]]
 
 ==== Installation ====
-copy the plugin to your adm_plugins folder
-add the following codeblock to /themes/simple/templates/system/overview.tpl
-```
-<div class="admidio-overview-plugin col-sm-6 col-lg-4 col-xl-3" id="admidio-plugin-search-member">
-    <div class="card admidio-card">
-        <div class="card-body">
-            {load_admidio_plugin plugin="search_member" file="search_member.php"}
-        </div>
-    </div>
-</div>
-```
+This plugin uses the Admidio 6 plugin system. Deploy this directory as
+plugins/search_member/ below your Admidio installation, then install and enable it from
+*Administration → Extensions*. All preferences, including the ones a version before 3.0.0 kept in
+config.php, are then edited on the plugin's own preferences panel; a config.php from a previous
+installation is picked up automatically once when the plugin is updated.
 
 ==== Contribution ====
 Contributions and feature requests are welcome
